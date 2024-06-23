@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <script src="https://kit.fontawesome.com/42aaf70010.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Home</title>
+  </head>
+  <body class="bg-secondary-subtle">
+    <nav
+      class="navbar navbar-expand-lg bg-body-premery text-center"
+      style="background-color: #e3f2fd"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"
+          ><h1><i class="bi bi-house-heart-fill"></i></h1
+        ></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/add-projek">Add Projek</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/testimonial">testinonial</a>
+            </li>
+          </ul>
+          <a href="/contact"
+            ><button class="btn btn-dark">Contact Me</button>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Tambahkan blok untuk pesan flash di sini -->
+    {{#if messages.success}}
+    <div class="alert alert-success" role="alert">
+      {{messages.success}}
+    </div>
+    {{/if}}
+    {{#if messages.error}}
+    <div class="alert alert-danger" role="alert">
+      {{messages.error}}
+    </div>
+    {{/if}}
+
+    <div class="container shadow rounded mt-3 pt-4 pb-4 ps-4 pe-4 bg-light">
+      <div class="row">
+        <div class="col-sm-6 col-md-5 col-lg-6 .me-auto">
+          <h1>hi welocome to my hut</h1>
+          <p>
+            kembali sehat
+          </p>
+          <a href="/contact">
+            <button href class="btn btn-dark gp-5">contact</button></a
+          >
+          <a class="btn btn-download" href="#"
+            >donwload <i class="bi bi-download"></i
+          ></a>
+        
+          <div class="fs-1 pt-5 pl-5 text-center ">
+            <a class="btn btn-download" href="#"
+              >
+            <i class=" fs-3 bi bi-linkedin"></i></a>
+            <a class="btn btn-download" href="#"
+              ><i class="fs-3 bi bi-instagram"></i></a>
+              <a class=" btn btn-download" href="#"
+              ><i class="fs-3 bi bi-facebook"></i></a>
+              <a class="btn btn-download" href="#"
+              ><i class="fs-3bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap-reverse  col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0 gap-3">
+          <div class="card img-fluid shadow">
+            <img src="assets/images/profil.jpg" class="card-img-top object-fit-cover" alt="profil">
+            <div class="card-body text-center">
+              <h5 class="card-title">handry</h5>
+              <p class="card-text">Interior Designer.</p>
+              
+            </div>
+          </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+
+          <h2 class="text-center mb-4">MY PROJECT</h2>
+          <div id="content" class="row">
+            {{#if projects.length}}
+              {{#each projects}}
+                <div class="col-md-4">
+                  <div class="card mb-3 shadow">
+                    <div class="card-body"><img src="{{this.image}}" alt="image upload" class="img-thumbnail" />
+                      <h5 class="card-title"><a href="/detail-projek/{{this.id}}">{{this.title}}</a>- {{this.startYear}}</h5>
+                      <p class="card-text">Durasi: {{this.durationDays}} hari</p>
+                      <p class="card-text">{{this.content}}</p>
+                      
+                      <div class="card-text">
+                        {{#if this.nodeJS}}
+                          <i class="fa-brands fa-node-js"></i>
+                        {{/if}}
+                        {{#if this.reactJS}}
+                          <i class="fa-brands fa-react"></i>
+                        {{/if}}
+                        {{#if this.nextJS}}
+                          <i class="fa-brands fa-js"></i>
+                        {{/if}}
+                        {{#if this.typeScript}}
+                          <i class="fa-brands fa-vuejs"></i>
+                        {{/if}}
+                      </div>
+                      <div class="d-flex mt-3" style="height:fit-content;">
+                        <a class="btn btn-secondary me-2" href="/update-projek/{{this.id}}">Edit Post</a>
+                        <form method="post" action="/delete-projek/{{this.id}}">
+                          <button type="submit" class="btn btn-danger">Delete Post</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{/each}}
+            {{else}}
+              <p class="text-center">Tidak ada data yang tersedia.</p>
+            {{/if}}
+          </div>
+        </div>
+        
+      
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assests/js/blog.js"></script>
+  </body>
+</html>
